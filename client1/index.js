@@ -14,7 +14,6 @@ udp_server.on('listening', function (a) {
 });
 // 客户端信息，以及测试用的客户端信息
 let clients, testClient;
-let lastSendTime;
 //接收消息
 udp_server.on('message', function (msg, rinfo) {
     var data = bencode.decode(msg);
@@ -30,15 +29,6 @@ udp_server.on('message', function (msg, rinfo) {
     } else if (data.type == "client") {
         //显示获取的信息
         console.log((new Date()).toLocaleString(), data.id.toString(), rinfo.address.toString(), data.data.toString());
-        // 返回回复消息，用于测量时间
-        if (testClient) {
-            var buff = bencode.encode({id: ID, data: "Hello Client", type: "client-reply"});
-            udp_server.send(buff, 0, buff.length, testClient.port, testClient.address.toString());
-        }
-    } else if (data.type == "client-reply") {
-        //显示获取的信息
-        console.log((new Date()).toLocaleString(), data.id.toString(), rinfo.address.toString(), data.data.toString());
-        console.log("来回时间为" + (new Date().getDate() - lastSendTime));
     }
 })
 //错误处理
@@ -58,7 +48,6 @@ function sendClient() {
     if (testClient) {
         var buff = bencode.encode({ id: ID, data: "Hello Client", type: "client" });
         udp_server.send(buff, 0, buff.length, testClient.port, testClient.address.toString());
-        lastSendTime = new Date().getTime();
     }
 }
 // 定时发送服务器（发送心跳包）
