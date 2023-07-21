@@ -1,0 +1,7 @@
+{
+  "name": "research_upd_hole",
+  "version": "1.0.0",
+  "dependencies": {
+    "bencode": "1.0.0"
+  }
+}
