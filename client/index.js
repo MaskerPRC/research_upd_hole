@@ -40,7 +40,7 @@ udp_server.on('error', function (err) {
 function sendServer() {
     var buff = bencode.encode({ id: ID, data: "Hello Server", type: "client" });
     // 自定义发送 服务器 外网端口与ip
-    udp_server.send(buff, 0, buff.length, 8902, '39.98.113.76');
+    udp_server.send(buff, 0, buff.length, 1111, '39.98.113.76');
 }
 sendServer();
 // 向其他客户端发送测试数据
