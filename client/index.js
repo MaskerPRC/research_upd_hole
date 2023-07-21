@@ -38,7 +38,7 @@ udp_server.on('message', function (msg, rinfo) {
     } else if (data.type == "client-reply") {
         //显示获取的信息
         console.log((new Date()).toLocaleString(), data.id.toString(), rinfo.address.toString(), data.data.toString());
-        console.log("来回时间为" + (new Date().getDate() - lastSendTime));
+        console.log("来回时间为" + (new Date().getTime() - lastSendTime));
     }
 })
 //错误处理
